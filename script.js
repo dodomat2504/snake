@@ -1,5 +1,6 @@
-const WINDOW_LENGTH = 800; // 8====D
+const WINDOW_LENGTH = 800;
 const FOOD_AMOUNT = 1;
+let gridCB;
 let g;
 let bodys = [];
 let food = [];
@@ -60,7 +61,6 @@ class Body {
       this.heading = this.prev.oldHeading;
       this.position = this.prev.oldPosition;
       this.oldPosition = createVector(this.position.x - this.heading.x, this.position.y - this.heading.y);
-      
     } else {
       this.oldHeading = this.heading;
       if (keyIsDown(LEFT_ARROW)) {
@@ -145,13 +145,15 @@ function setup() {
   for (let i = 0; i < FOOD_AMOUNT; i++) {
     food.push(new Food());
   }
+
+  gridCB = createCheckbox("Raster", false);
 }
 
 function draw() {
   frameRate(4);
   background(220);
 
-  // g.draw();
+  if (gridCB.checked()) g.draw();
 
   for (let i = 0; i < bodys.length; i++) { // move loop
     bodys[i].move();
