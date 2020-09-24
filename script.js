@@ -2,6 +2,7 @@ let WINDOW_LENGTH = 800;
 const FOOD_AMOUNT = 1;
 let gridCB;
 let g;
+let frameRateSlider;
 let bodys = [];
 let food = [];
 let running = 1;
@@ -121,8 +122,6 @@ class Body {
 class Grid {
   constructor(blocksPerRow) {
     this.blocksPerRow = blocksPerRow;
-    // this.blen = Math.floor(WINDOW_LENGTH / this.blocksPerRow);
-    // this.bhei = Math.floor(WINDOW_LENGTH / this.blocksPerRow);
     this.blen = WINDOW_LENGTH / this.blocksPerRow;
     this.bhei = WINDOW_LENGTH / this.blocksPerRow;
   }
@@ -158,12 +157,14 @@ function setup() {
     food.push(new Food());
   }
 
+  frameRateSlider = createSlider(1, 100, 4, 1);
   gridCB = createCheckbox("Raster", false);
   gamemodeCB = createCheckbox("Endless mode", false);
 }
 
 function draw() {
-  frameRate(4);
+  
+  frameRate(frameRateSlider.value());
   if (running === 0) noLoop();
   background(220);
 
@@ -201,5 +202,8 @@ function draw() {
     fill(color(255, 0, 0));
     food[i].draw();
   }
+
+  textSize(40);
+  text("FrameRate: " + frameRateSlider.value(), WINDOW_LENGTH / 2, - (WINDOW_LENGTH / 2));
 
 }
