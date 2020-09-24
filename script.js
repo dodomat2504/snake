@@ -1,4 +1,4 @@
-let WINDOW_LENGTH = 800;
+let WINDOW_LENGTH;
 const FOOD_AMOUNT = 1;
 let gridCB;
 let g;
@@ -147,7 +147,7 @@ class Grid {
 }
 
 function setup() {
-  WINDOW_LENGTH = (windowWidth > windowHeight ? windowHeight : windowWidth) - 50;
+  WINDOW_LENGTH = (windowWidth > windowHeight ? windowHeight : windowWidth) - 100;
 
   createCanvas(WINDOW_LENGTH, WINDOW_LENGTH);
   g = new Grid(20);
